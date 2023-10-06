@@ -2,8 +2,8 @@ package com.intafy.testtablayout;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,21 +12,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
-
-import java.sql.Time;
+import com.intafy.testtablayout.ViewModels.TabViewModel;
 import java.util.Calendar;
 
 public class WorkoutFragment extends Fragment {
     Button btnTime,btnDate;
     TextView tvDate,tvTime;
     Calendar date = Calendar.getInstance();
+    TabViewModel tabViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_create_workout, container, false);
+        Log.d("MyLog","Frag_onCreateView");
+
+        return inflater.inflate(R.layout.fragment_create_workout,container,false);
     }
     @Override
     public void onStart() {
+        Log.d("MyLog","Frag_onStart");
         super.onStart();
     View view = getView();
         if(view!=null){
@@ -34,6 +37,13 @@ public class WorkoutFragment extends Fragment {
             btnTime = view.findViewById(R.id.btnTime);
             tvDate = view.findViewById(R.id.tvDate);
             tvTime = view.findViewById(R.id.tvTime);
+            tabViewModel=new ViewModelProvider(requireActivity()).get(TabViewModel.class);
+            tabViewModel.load().observe(this,new Observer<String>(){
+                @Override
+                public void onChanged(String s) {
+                    tvTime.setText(s);
+                }
+            });
             btnTime.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -65,5 +75,3 @@ public class WorkoutFragment extends Fragment {
         }
     };
 }
-
-

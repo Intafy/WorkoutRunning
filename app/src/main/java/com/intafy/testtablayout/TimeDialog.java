@@ -34,9 +34,9 @@ public class TimeDialog extends DialogFragment {
             numberPickerHours.setMinValue(0);
             numberPickerHours.setMaxValue(24);
             numberPickerMinutes.setMinValue(0);
-            numberPickerMinutes.setMaxValue(60);
+            numberPickerMinutes.setMaxValue(59);
             numberPickerSeconds.setMinValue(0);
-            numberPickerSeconds.setMaxValue(60);
+            numberPickerSeconds.setMaxValue(59);
             btnOk.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
