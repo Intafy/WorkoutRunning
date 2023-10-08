@@ -38,10 +38,16 @@ public class WorkoutFragment extends Fragment {
             tvDate = view.findViewById(R.id.tvDate);
             tvTime = view.findViewById(R.id.tvTime);
             tabViewModel=new ViewModelProvider(requireActivity()).get(TabViewModel.class);
-            tabViewModel.load().observe(this,new Observer<String>(){
+            tabViewModel.loadTime().observe(this,new Observer<String>(){
                 @Override
                 public void onChanged(String s) {
                     tvTime.setText(s);
+                }
+            });
+            tabViewModel.loadDate().observe(this, new Observer<String>() {
+                @Override
+                public void onChanged(String s) {
+                    tvDate.setText(s);
                 }
             });
             btnTime.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +77,7 @@ public class WorkoutFragment extends Fragment {
             String dateOfDay = DateUtils.formatDateTime(getActivity(),
                     date.getTimeInMillis(),
                     DateUtils.FORMAT_NUMERIC_DATE | DateUtils.FORMAT_SHOW_YEAR);
-            tvDate.setText(dateOfDay);
+            tabViewModel.saveDate(dateOfDay);
         }
     };
 }
