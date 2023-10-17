@@ -7,11 +7,14 @@
     <string name="btn_Date">Дата</string>
     <string name="btn_Distance">Дистанция</string>
     <string name="btn_Time">Время</string>
-    <string name="enter_time">Введите время пробежки</string>
+    <string name="btn_Save">Сохранить</string>
+    <string name="enter_Time">Введите время пробежки</string>
+    <string name="enter_Dist">Введите расстояние</string>
     <string name="Choose_ok">Ok</string>
     <string name="Choose_cancel">Cancel</string>
     <string name="btnDate">Дата</string>
     <string name="btnTime">Время</string>
+    <string name="btnDist">Дистанция</string>
     <string name="tvHours">Часы</string>
     <string name="tvMinutes">Минуты</string>
     <string name="tvSeconds">Секунды</string>

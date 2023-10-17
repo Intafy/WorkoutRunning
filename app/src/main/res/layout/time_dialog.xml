@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <NumberPicker
         android:id="@+id/numberPickerHours"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="54sp"
+        android:layout_height="100sp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/numberPickerMinutes"
@@ -17,20 +17,22 @@
 
     <NumberPicker
         android:id="@+id/numberPickerMinutes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_width="54sp"
+        android:layout_height="100sp"
+        android:layout_marginTop="8dp"
+        android:contextClickable="false"
         android:gravity="center"
         android:orientation="vertical"
+        android:scrollbarSize="2sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEnterTime" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <NumberPicker
         android:id="@+id/numberPickerHoursSeconds"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="54sp"
+        android:layout_height="100sp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/numberPickerMinutes"
@@ -41,57 +43,77 @@
         android:id="@+id/tvEnterTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/enter_time"
+        android:layout_marginTop="8sp"
+        android:text="@string/enter_Time"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_ok"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/Choose_ok"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/numberPickerHoursSeconds"
-        app:layout_constraintTop_toBottomOf="@+id/numberPickerMinutes" />
-
-    <Button
-        android:id="@+id/button_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Choose_cancel"
-        app:layout_constraintEnd_toStartOf="@+id/button_ok"
         app:layout_constraintStart_toStartOf="@+id/numberPickerHours"
-        app:layout_constraintTop_toTopOf="@+id/button_ok" />
+        app:layout_constraintTop_toBottomOf="@+id/numberPickerMinutes">
+
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2sp"
+            android:layout_weight="1"
+            android:text="@string/Choose_cancel"
+            android:textSize="9sp" />
+
+        <Button
+            android:id="@+id/button_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2sp"
+            android:layout_weight="1"
+            android:text="@string/Choose_ok"
+            android:textSize="9sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:gravity="center"
         android:text="@string/tvHours"
-        app:layout_constraintBottom_toTopOf="@+id/numberPickerHours"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="@+id/numberPickerHours"
-        app:layout_constraintStart_toStartOf="@+id/numberPickerHours" />
+        app:layout_constraintStart_toStartOf="@+id/numberPickerHours"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="@string/tvMinutes"
-        app:layout_constraintBottom_toTopOf="@+id/numberPickerMinutes"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="@+id/numberPickerMinutes"
-        app:layout_constraintStart_toEndOf="@+id/numberPickerHours" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/numberPickerHours"
+        app:layout_constraintTop_toBottomOf="@+id/tvEnterTime" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:gravity="center"
         android:text="@string/tvSeconds"
-        app:layout_constraintBottom_toTopOf="@+id/numberPickerHoursSeconds"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="@+id/numberPickerHoursSeconds"
-        app:layout_constraintStart_toEndOf="@+id/numberPickerMinutes"/>
+        app:layout_constraintStart_toEndOf="@+id/numberPickerMinutes"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

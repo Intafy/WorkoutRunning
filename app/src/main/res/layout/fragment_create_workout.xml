@@ -3,15 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity"
+    tools:context=".intafy.presentation.MainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="204dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toStartOf="@+id/btnDate"
         app:layout_constraintHorizontal_bias="0.292"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,22 +25,58 @@
         app:layout_constraintEnd_toEndOf="@+id/tvDate"
         app:layout_constraintStart_toStartOf="@+id/tvDate"
         app:layout_constraintTop_toBottomOf="@+id/btnDate" />
+
     <Button
         android:id="@+id/btnDate"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
         android:onClick="onClickDate"
         android:text="@string/btnDate"
         app:layout_constraintBottom_toBottomOf="@+id/tvDate"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnTime"
+        app:layout_constraintStart_toStartOf="@+id/btnTime"
         app:layout_constraintTop_toTopOf="@+id/tvDate" />
+
     <Button
         android:id="@+id/btnTime"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/btnTime"
-        app:layout_constraintEnd_toEndOf="@+id/btnDate"
-        app:layout_constraintStart_toStartOf="@+id/btnDate"
+        app:layout_constraintEnd_toEndOf="@+id/btnDist"
+        app:layout_constraintStart_toStartOf="@+id/btnDist"
         app:layout_constraintTop_toBottomOf="@+id/btnDate" />
+
+    <Button
+        android:id="@+id/btnDist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:text="@string/btnDist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnTime" />
+
+    <EditText
+        android:id="@+id/edDist"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/enter_Dist"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnDist"
+        app:layout_constraintEnd_toEndOf="@+id/tvTime"
+        app:layout_constraintStart_toStartOf="@+id/tvTime"
+        app:layout_constraintTop_toBottomOf="@+id/btnTime" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_Save"
+        app:layout_constraintEnd_toEndOf="@+id/btnDist"
+        app:layout_constraintStart_toStartOf="@+id/btnDist"
+        app:layout_constraintTop_toBottomOf="@+id/btnDist" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

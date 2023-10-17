@@ -1,4 +1,4 @@
-package com.intafy.testtablayout;
+package com.intafy.testtablayout.intafy.presentation;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,11 +7,10 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
-
 import android.os.Bundle;
 import android.util.Log;
-
-import com.intafy.testtablayout.ViewModels.TabViewModel;
+import com.intafy.testtablayout.R;
+import com.intafy.testtablayout.intafy.presentation.ViewModels.TabViewModel;
 
 public class TabLayoutActivity extends AppCompatActivity implements TimeDialog.OnTimeListener{
     TabViewModel tabViewModel;

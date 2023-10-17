@@ -1,4 +1,4 @@
-package com.intafy.testtablayout;
+package com.intafy.testtablayout.intafy.presentation;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.widget.NumberPicker;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+
+import com.intafy.testtablayout.R;
 
 public class TimeDialog extends DialogFragment {
     NumberPicker numberPickerHours,numberPickerMinutes,numberPickerSeconds;

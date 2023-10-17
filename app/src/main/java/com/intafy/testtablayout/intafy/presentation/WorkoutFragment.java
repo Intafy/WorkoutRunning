@@ -1,4 +1,4 @@
-package com.intafy.testtablayout;
+package com.intafy.testtablayout.intafy.presentation;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -11,20 +11,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
-import com.intafy.testtablayout.ViewModels.TabViewModel;
+
+import com.intafy.testtablayout.R;
+import com.intafy.testtablayout.intafy.presentation.ViewModels.TabViewModel;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class WorkoutFragment extends Fragment {
-    Button btnTime,btnDate;
+
+    Button btnTime,btnDate,btnDist,btnSave;
     TextView tvDate,tvTime;
+    EditText edDist;
     Calendar date = Calendar.getInstance();
     TabViewModel tabViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d("MyLog","Frag_onCreateView");
-
         return inflater.inflate(R.layout.fragment_create_workout,container,false);
     }
     @Override
@@ -35,8 +40,12 @@ public class WorkoutFragment extends Fragment {
         if(view!=null){
             btnDate = view.findViewById(R.id.btnDate);
             btnTime = view.findViewById(R.id.btnTime);
+            btnDist = view.findViewById(R.id.btnDist);
+            btnSave = view.findViewById(R.id.btnSave);
             tvDate = view.findViewById(R.id.tvDate);
             tvTime = view.findViewById(R.id.tvTime);
+            edDist = view.findViewById(R.id.edDist);
+
             tabViewModel=new ViewModelProvider(requireActivity()).get(TabViewModel.class);
             tabViewModel.loadTime().observe(this,new Observer<String>(){
                 @Override
@@ -50,24 +59,37 @@ public class WorkoutFragment extends Fragment {
                     tvDate.setText(s);
                 }
             });
-            btnTime.setOnClickListener(new View.OnClickListener() {
+        }
+
+//            btnDist.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                }
+//            });
+    btnTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new TimeDialog().show(getChildFragmentManager(),"timeDialog");
+                Log.d ("MyLog","TimeDialog.show");
+            }
+        });
+    btnDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getContext(), d,
+                        date.get(Calendar.YEAR),
+                        date.get(Calendar.MONTH),
+                        date.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+    btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new TimeDialog().show(getChildFragmentManager(),"timeDialog");
-                    Log.d ("MyLog","TimeDialog.show");
-                }
-            });
-            btnDate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    new DatePickerDialog(getContext(), d,
-                            date.get(Calendar.YEAR),
-                            date.get(Calendar.MONTH),
-                            date.get(Calendar.DAY_OF_MONTH)).show();
+                   tabViewModel.saveWorkout();
                 }
             });
         }
-    }
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -80,4 +102,4 @@ public class WorkoutFragment extends Fragment {
             tabViewModel.saveDate(dateOfDay);
         }
     };
-}
+    }

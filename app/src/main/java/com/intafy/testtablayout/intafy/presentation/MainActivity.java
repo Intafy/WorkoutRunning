@@ -1,9 +1,12 @@
-package com.intafy.testtablayout;
+package com.intafy.testtablayout.intafy.presentation;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.intafy.testtablayout.R;
+
 public class MainActivity extends AppCompatActivity {
     Button btn;
     @Override
