@@ -57,13 +57,14 @@
 
     <EditText
         android:id="@+id/edDist"
-        android:layout_width="wrap_content"
+        android:layout_width="149dp"
         android:layout_height="48dp"
         android:ems="10"
         android:gravity="center"
         android:hint="@string/enter_Dist"
         android:inputType="number"
         android:minHeight="48dp"
+        android:textAllCaps="false"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/btnDist"
         app:layout_constraintEnd_toEndOf="@+id/tvTime"
@@ -74,9 +75,20 @@
         android:id="@+id/btnSave"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/btn_Save"
+        android:layout_marginTop="16dp"
+        android:text="@string/btnSave"
         app:layout_constraintEnd_toEndOf="@+id/btnDist"
         app:layout_constraintStart_toStartOf="@+id/btnDist"
         app:layout_constraintTop_toBottomOf="@+id/btnDist" />
+
+    <Button
+        android:id="@+id/bntClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:text="@string/btnClear"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSave"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnSave" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

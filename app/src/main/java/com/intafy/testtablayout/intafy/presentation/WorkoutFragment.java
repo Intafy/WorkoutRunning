@@ -17,11 +17,10 @@ import android.widget.TextView;
 import com.intafy.testtablayout.R;
 import com.intafy.testtablayout.intafy.presentation.ViewModels.TabViewModel;
 import java.util.Calendar;
-import java.util.Objects;
 
 public class WorkoutFragment extends Fragment {
 
-    Button btnTime,btnDate,btnDist,btnSave;
+    Button btnTime,btnDate,btnDist,btnSave,btnClear;
     TextView tvDate,tvTime;
     EditText edDist;
     Calendar date = Calendar.getInstance();
@@ -30,7 +29,7 @@ public class WorkoutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d("MyLog","Frag_onCreateView");
-        return inflater.inflate(R.layout.fragment_create_workout,container,false);
+        return inflater.inflate(R.layout.fragment_workout,container,false);
     }
     @Override
     public void onStart() {
@@ -42,6 +41,7 @@ public class WorkoutFragment extends Fragment {
             btnTime = view.findViewById(R.id.btnTime);
             btnDist = view.findViewById(R.id.btnDist);
             btnSave = view.findViewById(R.id.btnSave);
+            btnClear = view.findViewById(R.id.bntClear);
             tvDate = view.findViewById(R.id.tvDate);
             tvTime = view.findViewById(R.id.tvTime);
             edDist = view.findViewById(R.id.edDist);
@@ -89,7 +89,14 @@ public class WorkoutFragment extends Fragment {
                    tabViewModel.saveWorkout();
                 }
             });
+    btnClear.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            tabViewModel.clearAllValues();
         }
+    });
+        }
+
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {

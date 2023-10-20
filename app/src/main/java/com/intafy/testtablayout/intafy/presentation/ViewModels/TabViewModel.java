@@ -42,5 +42,9 @@ public class TabViewModel extends ViewModel {
             saveWorkoutUseCase.execute(newWorkout);
         }
     }
+    public void clearAllValues(){
+        dateLiveData.postValue(DEFAULT_DATE);
+        timeLiveData.postValue(DEFAULT_TIME);
+    }
 }
 
