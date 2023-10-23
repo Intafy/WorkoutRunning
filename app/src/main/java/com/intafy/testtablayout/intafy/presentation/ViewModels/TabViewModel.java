@@ -4,14 +4,12 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import com.intafy.testtablayout.R;
 import com.intafy.testtablayout.intafy.domain.models.Workout;
 import com.intafy.testtablayout.intafy.domain.usecases.SaveWorkoutUseCase;
 
 public class TabViewModel extends ViewModel {
-    private final String DEFAULT_DATE ="Вы не ввели дату";
-    private final String DEFAULT_TIME = "Вы не ввели время";
+    private final String DEFAULT_DATE ="Введите дату";
+    private final String DEFAULT_TIME = "Введите время";
     private MutableLiveData<String>dateLiveData = new MutableLiveData<>(DEFAULT_DATE);
     private MutableLiveData<String> timeLiveData = new MutableLiveData<>(DEFAULT_TIME);
 

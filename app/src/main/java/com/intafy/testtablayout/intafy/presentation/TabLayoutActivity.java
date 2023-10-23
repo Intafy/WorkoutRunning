@@ -12,7 +12,7 @@ import android.util.Log;
 import com.intafy.testtablayout.R;
 import com.intafy.testtablayout.intafy.presentation.ViewModels.TabViewModel;
 
-public class TabLayoutActivity extends AppCompatActivity implements TimeDialog.OnTimeListener{
+public class TabLayoutActivity extends AppCompatActivity implements TimeDialog.OnTimeListener, ShortTimeDialog.OnShortTimeListener {
     TabViewModel tabViewModel;
     Fragment fragment;
     @Override
@@ -27,6 +27,9 @@ public class TabLayoutActivity extends AppCompatActivity implements TimeDialog.O
     }
     @Override
     public void onTimeListener(String time) {
+        tabViewModel.saveTime(time);
+    }
+    public void onShortTimeListener(String time){
         tabViewModel.saveTime(time);
     }
     private class PagerAdapter extends FragmentStateAdapter{

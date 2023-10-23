@@ -14,13 +14,12 @@ import androidx.fragment.app.DialogFragment;
 
 import com.intafy.testtablayout.R;
 
-public class TimeDialog extends DialogFragment {
-    NumberPicker numberPickerHours,numberPickerMinutes,numberPickerSeconds;
+public class ShortTimeDialog extends DialogFragment {
+    NumberPicker numberPickerMinutes,numberPickerSeconds,numberPickerMilliSeconds;
     Button btnOk,btnCanceled;
-    private OnTimeListener timeListener;
-    @Override
+    private ShortTimeDialog.OnShortTimeListener shortTimeListener;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.time_dialog, container, false);
+        return inflater.inflate(R.layout.short_time_dialog, container, false);
     }
     @Override
     public void onStart() {
@@ -29,35 +28,35 @@ public class TimeDialog extends DialogFragment {
         if(view!=null) {
             btnOk = view.findViewById(R.id.button_ok);
             btnCanceled = view.findViewById(R.id.button_cancel);
-            numberPickerHours = view.findViewById(R.id.numberPickerHours);
             numberPickerMinutes = view.findViewById(R.id.numberPickerMinutes);
-            numberPickerSeconds = view.findViewById(R.id.numberPickerHoursSeconds);
-            numberPickerHours.setMinValue(0);
-            numberPickerHours.setMaxValue(24);
+            numberPickerSeconds = view.findViewById(R.id.numberPickerSeconds);
+            numberPickerMilliSeconds = view.findViewById(R.id.numberPickerMilliseconds);
             numberPickerMinutes.setMinValue(0);
             numberPickerMinutes.setMaxValue(59);
             numberPickerSeconds.setMinValue(0);
             numberPickerSeconds.setMaxValue(59);
+            numberPickerMilliSeconds.setMaxValue(9);
+            numberPickerMilliSeconds.setMinValue(0);
             btnOk.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     String setTime;
-                    if(numberPickerHours.getValue() != 0)
-                        setTime = numberPickerHours.getValue() + " ч "
-                                + numberPickerMinutes.getValue() + " м "
-                                + numberPickerSeconds.getValue() + " с";
-                    else setTime = numberPickerMinutes.getValue() + " м "
-                            + numberPickerSeconds.getValue() + " с";
-                    timeListener.onTimeListener(setTime);
+                    if(numberPickerMinutes.getValue()!=0)
+                        setTime = numberPickerMinutes.getValue() + " м "
+                            + numberPickerSeconds.getValue() + "."
+                            + numberPickerMilliSeconds.getValue() + " с";
+                    else setTime = numberPickerSeconds.getValue() + "."
+                            + numberPickerMilliSeconds.getValue() + " с";
+                    shortTimeListener.onShortTimeListener(setTime);
                     dismiss();
                 }
             });
             btnCanceled.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    numberPickerHours.setValue(0);
                     numberPickerMinutes.setValue(0);
                     numberPickerSeconds.setValue(0);
+                    numberPickerMilliSeconds.setValue(0);
                 }
             });
         }
@@ -65,14 +64,14 @@ public class TimeDialog extends DialogFragment {
     @Override
     public void onAttach(@NonNull Context context){
         super.onAttach(context);
-        if (context instanceof OnTimeListener){
-            timeListener = (OnTimeListener) context;
+        if (context instanceof ShortTimeDialog.OnShortTimeListener){
+            shortTimeListener = (ShortTimeDialog.OnShortTimeListener) context;
         }else {
             throw new RuntimeException(context.toString() +
                     "must implement OnTimeListener");
         }
     }
-    public interface OnTimeListener {
-        void onTimeListener(String time);
+    public interface OnShortTimeListener {
+        void onShortTimeListener(String time);
     }
 }

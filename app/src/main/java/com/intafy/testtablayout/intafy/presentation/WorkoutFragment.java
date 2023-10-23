@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.intafy.testtablayout.R;
 import com.intafy.testtablayout.intafy.presentation.ViewModels.TabViewModel;
@@ -20,7 +21,7 @@ import java.util.Calendar;
 
 public class WorkoutFragment extends Fragment {
 
-    Button btnTime,btnDate,btnDist,btnSave,btnClear;
+    Button btnTime,btnDate,btnSave,btnClear;
     TextView tvDate,tvTime;
     EditText edDist;
     Calendar date = Calendar.getInstance();
@@ -39,7 +40,6 @@ public class WorkoutFragment extends Fragment {
         if(view!=null){
             btnDate = view.findViewById(R.id.btnDate);
             btnTime = view.findViewById(R.id.btnTime);
-            btnDist = view.findViewById(R.id.btnDist);
             btnSave = view.findViewById(R.id.btnSave);
             btnClear = view.findViewById(R.id.bntClear);
             tvDate = view.findViewById(R.id.tvDate);
@@ -70,8 +70,16 @@ public class WorkoutFragment extends Fragment {
     btnTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new TimeDialog().show(getChildFragmentManager(),"timeDialog");
-                Log.d ("MyLog","TimeDialog.show");
+                String dist = edDist.getText().toString();
+                if (dist.equals("")) tvTime.setText(R.string.enter_Dist);
+                else {
+                    if (Integer.parseInt(dist)>=1000) {
+                        new TimeDialog().show(getChildFragmentManager(), "timeDialog");
+                        Log.d("MyLog", "TimeDialog.show");
+                    }
+                    else new ShortTimeDialog().show(getChildFragmentManager(),"shortTimeDialog");
+
+                }
             }
         });
     btnDate.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +100,7 @@ public class WorkoutFragment extends Fragment {
     btnClear.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            edDist.setText("");
             tabViewModel.clearAllValues();
         }
     });

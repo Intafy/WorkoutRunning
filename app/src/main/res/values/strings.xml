@@ -4,11 +4,6 @@
     <string name="page_Main">Главная</string>
     <string name="page_Workout">Тренировка</string>
     <string name="page_History">История тренировок</string>
-
-<!--    <string name="btn_Date">Дата</string>-->
-<!--    <string name="btn_Distance">Дистанция</string>-->
-<!--    <string name="btn_Time">Время</string>-->
-
     <string name="enter_Time">Введите время пробежки</string>
     <string name="enter_Dist">Введите расстояние</string>
     <string name="Choose_ok">Ok</string>
@@ -21,4 +16,5 @@
     <string name="tvHours">Часы</string>
     <string name="tvMinutes">Минуты</string>
     <string name="tvSeconds">Секунды</string>
+    <string name="tvMilliSeconds">Доли секунд</string>
 </resources>
