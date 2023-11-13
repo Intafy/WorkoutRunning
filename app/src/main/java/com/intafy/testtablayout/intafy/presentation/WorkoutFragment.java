@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.intafy.testtablayout.R;
 import com.intafy.testtablayout.intafy.presentation.ViewModels.TabViewModel;
@@ -94,7 +93,7 @@ public class WorkoutFragment extends Fragment {
     btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   tabViewModel.saveWorkout();
+                   tabViewModel.setWorkout();
                 }
             });
     btnClear.setOnClickListener(new View.OnClickListener() {

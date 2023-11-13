@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import com.intafy.testtablayout.R;
@@ -14,6 +16,7 @@ import com.intafy.testtablayout.intafy.presentation.ViewModels.TabViewModel;
 
 public class TabLayoutActivity extends AppCompatActivity implements TimeDialog.OnTimeListener, ShortTimeDialog.OnShortTimeListener {
     TabViewModel tabViewModel;
+//    Context context = getApplicationContext();
     Fragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
