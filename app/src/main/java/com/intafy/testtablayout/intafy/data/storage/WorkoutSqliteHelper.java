@@ -13,7 +13,7 @@ public class WorkoutSqliteHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate (SQLiteDatabase workoutDb){
-        updateMyBd(workoutDb,2,DB_NUMBER);
+        updateMyBd(workoutDb,0,DB_NUMBER);
     }
     public void onUpgrade(SQLiteDatabase workoutDb,int oldVersion,int newVersion){
         updateMyBd(workoutDb,oldVersion,newVersion);
@@ -21,15 +21,10 @@ public class WorkoutSqliteHelper extends SQLiteOpenHelper {
     public void onDowngrade (SQLiteDatabase workoutDb,int oldVersion,int newVersion){
     }
     private void updateMyBd(SQLiteDatabase workoutDb,int oldVersion,int newVersion){
-        if(oldVersion<2)
-            createTable(workoutDb);
-
-        if(oldVersion<3) {
-            workoutDb.execSQL("DROP TABLE WORKOUT");
-            createTable(workoutDb);
+        createTable(workoutDb);
         }
 
-    }
+
     private void createTable(SQLiteDatabase workoutDb){
         workoutDb.execSQL("CREATE TABLE WORKOUT ("
                 + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"

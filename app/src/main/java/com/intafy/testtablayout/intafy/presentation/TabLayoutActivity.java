@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -13,17 +14,20 @@ import android.os.Bundle;
 import android.util.Log;
 import com.intafy.testtablayout.R;
 import com.intafy.testtablayout.intafy.presentation.ViewModels.TabViewModel;
+import com.intafy.testtablayout.intafy.presentation.ViewModels.TabViewModelFactory;
 
 public class TabLayoutActivity extends AppCompatActivity implements TimeDialog.OnTimeListener, ShortTimeDialog.OnShortTimeListener {
     TabViewModel tabViewModel;
-//    Context context = getApplicationContext();
     Fragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab_layout);
         Log.d("MyLog", "Act created");
-        tabViewModel = new ViewModelProvider(this).get(TabViewModel.class);
+        tabViewModel = new ViewModelProvider((ViewModelStoreOwner) this,
+                (ViewModelProvider.Factory) new TabViewModelFactory(this))
+                .get(TabViewModel.class);
+
         ViewPager2 viewpager = findViewById(R.id.view_pager);
         PagerAdapter pagerAdapter = new PagerAdapter(this);
         viewpager.setAdapter(pagerAdapter);

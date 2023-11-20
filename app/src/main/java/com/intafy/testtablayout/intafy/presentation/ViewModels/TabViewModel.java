@@ -14,9 +14,9 @@ import com.intafy.testtablayout.intafy.presentation.TabLayoutActivity;
 
 public class TabViewModel extends ViewModel {
     Workout newWorkout;
-    SqliteStorage sqliteStorage = new SqliteStorage();
-    WorkoutRepository workoutRepository = new WorkoutRepository(sqliteStorage);
-    SaveWorkoutUseCase saveWorkoutUseCase = new SaveWorkoutUseCase(workoutRepository);
+
+    SaveWorkoutUseCase saveWorkoutUseCase;
+
     private final String DEFAULT_DATE ="Введите дату";
     private final String DEFAULT_TIME = "Введите время";
     private final String DEFAULT_DIST= "Введите расстояние";
@@ -27,6 +27,11 @@ public class TabViewModel extends ViewModel {
     {
         Log.d("MyLog","VM created");
     }
+
+    public TabViewModel(SaveWorkoutUseCase saveWorkoutUseCase) {
+        this.saveWorkoutUseCase = saveWorkoutUseCase;
+    }
+
     public void saveDate(String date){
         dateLiveData.postValue(date);
     }

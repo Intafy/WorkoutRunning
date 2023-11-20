@@ -12,34 +12,35 @@ import com.intafy.testtablayout.intafy.presentation.TabLayoutActivity;
 
 
 public class SqliteStorage implements WorkoutStorageInterface {
-    SQLiteDatabase workoutDb;
     Context context;
 
-//    public SqliteStorage(Context context) {
-//        this.context = context;
-//    }
+    public SqliteStorage(Context context) {
+        this.context = context;
+    }
 
     //Здесь пишем код сохранения в БД
     @Override
     public void saveWorkout(Workout workout) {
 
-//    WorkoutSqliteHelper workoutSqliteHelper = new WorkoutSqliteHelper(context);
+    WorkoutSqliteHelper workoutSqliteHelper = new WorkoutSqliteHelper(context);
     String date = workout.date;
     String time = workout.time;
         Log.d("MyLog","All in storage");
-//        try {
-//            ContentValues runValues = new ContentValues();
-//            runValues.put("DATE", date);
-//            runValues.put("DESCRIPTION", "Вы пробежали "  + "м за " + time + " (ч:м:с)");
-//            workoutDb = workoutSqliteHelper.getWritableDatabase();
-//            workoutDb.insert("WORKOUT", null, runValues);
-//            workoutDb.close();
-//            Log.d ("MyLog","All in Db");
-////            Toast.makeText(getApplicationContext(), "Запись сохранена", Toast.LENGTH_SHORT).show();
-////            Toast.makeText(getApplicationContext(),date+" "+ time + " " + dist,Toast.LENGTH_SHORT).show();
-//        }
-//        catch (SQLException e) {
-////            Toast.makeText(getApplicationContext(), "Database unavaible", Toast.LENGTH_SHORT).show();
-//        }
+        try {
+            ContentValues runValues = new ContentValues();
+            runValues.put("DATE", date);
+            runValues.put("DESCRIPTION", "Вы пробежали "  + "м за " + time + " (ч:м:с)");
+//            Log.d("MyLog","runValues has created");
+            SQLiteDatabase workoutDb = workoutSqliteHelper.getWritableDatabase();
+            Log.d("MyLog","Db has created");
+            workoutDb.insert("WORKOUT", null, runValues);
+            workoutDb.close();
+            Log.d ("MyLog","All in Db");
+//              Toast.makeText(getApplicationContext(), "Запись сохранена", Toast.LENGTH_SHORT).show();
+//              Toast.makeText(getApplicationContext(),date+" "+ time + " " + dist,Toast.LENGTH_SHORT).show();
+        }
+        catch (SQLException e) {
+//              Toast.makeText(getApplicationContext(), "Database unavaible", Toast.LENGTH_SHORT).show();
+        }
     }
 }
