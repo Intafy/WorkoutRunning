@@ -30,17 +30,15 @@ public class SqliteStorage implements WorkoutStorageInterface {
             ContentValues runValues = new ContentValues();
             runValues.put("DATE", date);
             runValues.put("DESCRIPTION", "Вы пробежали "  + "м за " + time + " (ч:м:с)");
-//            Log.d("MyLog","runValues has created");
             SQLiteDatabase workoutDb = workoutSqliteHelper.getWritableDatabase();
             Log.d("MyLog","Db has created");
             workoutDb.insert("WORKOUT", null, runValues);
             workoutDb.close();
             Log.d ("MyLog","All in Db");
-//              Toast.makeText(getApplicationContext(), "Запись сохранена", Toast.LENGTH_SHORT).show();
-//              Toast.makeText(getApplicationContext(),date+" "+ time + " " + dist,Toast.LENGTH_SHORT).show();
+//              Toast.makeText(context, "Запись сохранена", Toast.LENGTH_SHORT).show();
         }
         catch (SQLException e) {
-//              Toast.makeText(getApplicationContext(), "Database unavaible", Toast.LENGTH_SHORT).show();
+//              Toast.makeText(context, "Database unavaible", Toast.LENGTH_SHORT).show();
         }
     }
 }

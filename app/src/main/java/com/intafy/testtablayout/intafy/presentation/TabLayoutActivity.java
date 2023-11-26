@@ -25,7 +25,7 @@ public class TabLayoutActivity extends AppCompatActivity implements TimeDialog.O
         setContentView(R.layout.activity_tab_layout);
         Log.d("MyLog", "Act created");
         tabViewModel = new ViewModelProvider((ViewModelStoreOwner) this,
-                (ViewModelProvider.Factory) new TabViewModelFactory(this))
+                (ViewModelProvider.Factory) new TabViewModelFactory(getApplicationContext()))
                 .get(TabViewModel.class);
 
         ViewPager2 viewpager = findViewById(R.id.view_pager);
