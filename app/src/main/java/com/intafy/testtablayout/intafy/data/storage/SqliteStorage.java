@@ -10,6 +10,10 @@ import android.widget.Toast;
 import com.intafy.testtablayout.intafy.domain.models.Workout;
 import com.intafy.testtablayout.intafy.presentation.TabLayoutActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class SqliteStorage implements WorkoutStorageInterface {
     Context context;
@@ -40,5 +44,17 @@ public class SqliteStorage implements WorkoutStorageInterface {
         catch (SQLException e) {
 //              Toast.makeText(context, "Database unavaible", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public List<Workout> getWorkoutList() {
+        List<Workout>workouts = new ArrayList<>();
+
+        //Пробник для заполнения RecyclerView
+        Workout []workout = {new Workout("121212","151515"),new Workout("1566","131")};
+        workouts.addAll(Arrays.asList(workout));
+
+        //Добавление в лист записей из БД с помощью cursor
+        return workouts;
     }
 }

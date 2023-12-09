@@ -7,12 +7,15 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.intafy.testtablayout.intafy.domain.models.Workout;
+import com.intafy.testtablayout.intafy.domain.usecases.GetWorkoutListUseCase;
 import com.intafy.testtablayout.intafy.domain.usecases.SaveWorkoutUseCase;
+import java.util.List;
 
 public class TabViewModel extends ViewModel {
     Workout newWorkout;
 
     SaveWorkoutUseCase saveWorkoutUseCase;
+    GetWorkoutListUseCase getWorkoutListUseCase;
 
     private final String DEFAULT_DATE ="Введите дату";
     private final String DEFAULT_TIME = "Введите время";
@@ -45,14 +48,20 @@ public class TabViewModel extends ViewModel {
     }
     public void setWorkout() {
     new MyTask().execute();
-//        if(dateLiveData.getValue()!= DEFAULT_DATE && timeLiveData.getValue()!= DEFAULT_TIME) {
-//            newWorkout = new Workout(dateLiveData.getValue(), timeLiveData.getValue());
-//            saveWorkoutUseCase.execute(newWorkout);
-//        }
+    }
+    public List<Workout> getWorkoutList(){
+        return getWorkoutListUseCase.execute();
     }
     public void clearAllValues(){
         dateLiveData.postValue(DEFAULT_DATE);
         timeLiveData.postValue(DEFAULT_TIME);
+    }
+    private class GetListTask extends AsyncTask<Void,Void,List<Workout>>{
+
+        @Override
+        protected List<Workout> doInBackground(Void... voids) {
+            return null;
+        }
     }
     private class MyTask extends AsyncTask<Void,Void,Boolean>{
         @Override
