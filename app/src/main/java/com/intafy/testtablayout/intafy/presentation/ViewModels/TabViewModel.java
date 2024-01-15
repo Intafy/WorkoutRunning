@@ -25,8 +25,9 @@ public class TabViewModel extends ViewModel {
     private final MutableLiveData<String> distLiveData = new MutableLiveData<>(DEFAULT_DIST);
 
 
-    public TabViewModel(SaveWorkoutUseCase saveWorkoutUseCase) {
+    public TabViewModel(SaveWorkoutUseCase saveWorkoutUseCase,GetWorkoutListUseCase getWorkoutListUseCase) {
         this.saveWorkoutUseCase = saveWorkoutUseCase;
+        this.getWorkoutListUseCase=getWorkoutListUseCase;
     }
 
     public void saveDate(String date){

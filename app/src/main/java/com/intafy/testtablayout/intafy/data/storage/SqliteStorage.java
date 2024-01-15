@@ -51,7 +51,15 @@ public class SqliteStorage implements WorkoutStorageInterface {
         List<Workout>workouts = new ArrayList<>();
 
         //Пробник для заполнения RecyclerView
-        Workout []workout = {new Workout("121212","151515"),new Workout("1566","131")};
+        Workout []workout = {
+                new Workout("121212","151515"),
+                new Workout("1566","131"),
+                new Workout("121212","151515"),
+                new Workout("121212","151515"),
+                new Workout("121212","151515"),
+                new Workout("121212","151515"),
+                new Workout("121212","151515")
+        };
         workouts.addAll(Arrays.asList(workout));
 
         //Добавление в лист записей из БД с помощью cursor
