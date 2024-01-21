@@ -2,10 +2,14 @@ package com.intafy.testtablayout.intafy.data.storage;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.intafy.testtablayout.intafy.domain.models.Workout;
 import com.intafy.testtablayout.intafy.presentation.TabLayoutActivity;
@@ -17,6 +21,9 @@ import java.util.List;
 
 public class SqliteStorage implements WorkoutStorageInterface {
     Context context;
+    private WorkoutSqliteHelper workoutSqliteHelper;
+
+    private Cursor cursor;
 
     public SqliteStorage(Context context) {
         this.context = context;
@@ -26,7 +33,7 @@ public class SqliteStorage implements WorkoutStorageInterface {
     @Override
     public void saveWorkout(Workout workout) {
 
-    WorkoutSqliteHelper workoutSqliteHelper = new WorkoutSqliteHelper(context);
+    workoutSqliteHelper = new WorkoutSqliteHelper(context);
     String date = workout.date;
     String time = workout.time;
         Log.d("MyLog","All in storage");
@@ -48,21 +55,54 @@ public class SqliteStorage implements WorkoutStorageInterface {
 
     @Override
     public List<Workout> getWorkoutList() {
-        List<Workout>workouts = new ArrayList<>();
+
+
+
 
         //Пробник для заполнения RecyclerView
-        Workout []workout = {
-                new Workout("121212","151515"),
-                new Workout("1566","131"),
-                new Workout("121212","151515"),
-                new Workout("121212","151515"),
-                new Workout("121212","151515"),
-                new Workout("121212","151515"),
-                new Workout("121212","151515")
-        };
-        workouts.addAll(Arrays.asList(workout));
+//        Workout []workout = {
+//                new Workout("121212","151515"),
+//                new Workout("1566","131"),
+//                new Workout("121212","151515"),
+//                new Workout("121212","151515"),
+//                new Workout("121212","151515"),
+//                new Workout("121212","151515"),
+//                new Workout("121212","151515"),
+//                new Workout("121212","151515"),
+//                new Workout("121212","151515"),
+//                new Workout("121212","151515"),
+//                new Workout("121212","151515"),
+//                new Workout("121212","151515"),
+//                new Workout("121212","151515"),
+//                new Workout("121212","151515"),
+//                new Workout("121212","151515"),
+//                new Workout("121212","151515"),
+//                new Workout("121212","151515")
+//        };
+//        workouts.addAll(Arrays.asList(workout));
 
         //Добавление в лист записей из БД с помощью cursor
+        List<Workout>workouts = new ArrayList<>();
+        workoutSqliteHelper = new WorkoutSqliteHelper(context);
+        try{
+            SQLiteDatabase workoutDb = workoutSqliteHelper.getReadableDatabase();
+
+            cursor = workoutDb.query("WORKOUT",
+                    new String [] {"DATE","DESCRIPTION"},
+                    null,null,null,null,null);
+            if(cursor.moveToFirst()){
+                while(cursor.moveToNext()){
+                String date = cursor.getString(0);
+                String description = cursor.getString(1);
+                Workout workout = new Workout(date,description);
+                workouts.add(workout);
+                cursor.moveToNext();
+                }
+            }
+        } catch (SQLException e){
+            Log.d("MyLog","dataBase unavailable");
+        }
+
         return workouts;
     }
 }
