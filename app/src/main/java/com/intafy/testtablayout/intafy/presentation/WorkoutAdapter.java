@@ -34,7 +34,6 @@ public class WorkoutAdapter extends RecyclerView.Adapter <WorkoutAdapter.Workout
                 inflate(R.layout.workout_cardview,parent,false);
         return new WorkoutHolder(cv);
     }
-
     @Override
     public void onBindViewHolder(@NonNull WorkoutHolder holder, int position) {
         CardView cardView = holder.cardView;
@@ -43,7 +42,6 @@ public class WorkoutAdapter extends RecyclerView.Adapter <WorkoutAdapter.Workout
         dateText.setText(workoutList.get(position).date);
         timeText.setText(workoutList.get(position).time);
     }
-
     @Override
     public int getItemCount() {
         return workoutList.size();

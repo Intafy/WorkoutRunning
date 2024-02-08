@@ -58,14 +58,13 @@ public class WorkoutFragment extends Fragment {
                     tvDate.setText(s);
                 }
             });
+            tabViewModel.loadDist().observe(this, new Observer<String>() {
+                @Override
+                public void onChanged(String s) {
+                    edDist.setText(s);
+                }
+            });
         }
-
-//            btnDist.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                }
-//            });
     btnTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,10 +76,9 @@ public class WorkoutFragment extends Fragment {
                         Log.d("MyLog", "TimeDialog.show");
                     }
                     else new ShortTimeDialog().show(getChildFragmentManager(),"shortTimeDialog");
-
                 }
             }
-        });
+    });
     btnDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +91,10 @@ public class WorkoutFragment extends Fragment {
     btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   tabViewModel.setWorkout();
+                    if(edDist.getText()!=null) {
+                        tabViewModel.saveDist(edDist.getText().toString());
+                        tabViewModel.setWorkout();
+                    }
                 }
             });
     btnClear.setOnClickListener(new View.OnClickListener() {
