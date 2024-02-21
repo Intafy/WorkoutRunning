@@ -21,6 +21,9 @@ public class WorkoutRepository implements WorkoutInterface {
     @Override
     public List<Workout> getWorkoutList() {
         return workoutStorageInterface.getWorkoutList();
-
+    }
+    @Override
+    public  void deleteWorkout(){
+        workoutStorageInterface.deleteWorkout();
     }
 }

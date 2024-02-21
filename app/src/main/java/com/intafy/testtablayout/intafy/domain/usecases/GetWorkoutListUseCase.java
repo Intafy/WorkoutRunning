@@ -12,6 +12,5 @@ public class GetWorkoutListUseCase {
     }
     public List<Workout> execute(){
         return workoutInterface.getWorkoutList();
-
     }
 }

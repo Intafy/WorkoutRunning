@@ -1,9 +1,12 @@
 package com.intafy.testtablayout.intafy.presentation;
 
+
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -14,12 +17,19 @@ import com.intafy.testtablayout.intafy.domain.models.Workout;
 
 import java.util.List;
 
-public class WorkoutAdapter extends RecyclerView.Adapter <WorkoutAdapter.WorkoutHolder>{
+public class WorkoutAdapter extends RecyclerView.Adapter <WorkoutAdapter.WorkoutHolder> {
     private final List<Workout> workoutList;
+    private Listener listener;
 
     public WorkoutAdapter(List<Workout> workoutList){
 
         this.workoutList=workoutList;
+    }
+    interface Listener{
+        void onClick(int position);
+    }
+    public void setListener(Listener listener){
+        this.listener = listener;
     }
     public static class WorkoutHolder extends RecyclerView.ViewHolder{
         private final CardView cardView;
@@ -39,8 +49,17 @@ public class WorkoutAdapter extends RecyclerView.Adapter <WorkoutAdapter.Workout
         CardView cardView = holder.cardView;
         TextView dateText = cardView.findViewById(R.id.date_text);
         TextView timeText = cardView.findViewById(R.id.time_text);
-        dateText.setText(workoutList.get(position).date);
-        timeText.setText(workoutList.get(position).time);
+        dateText.setText(workoutList.get(holder.getAdapterPosition()).date);
+        timeText.setText(workoutList.get(holder.getAdapterPosition()).time);
+        cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(listener!=null){
+                    listener.onClick(holder.getAdapterPosition());
+                }
+                return true;
+            }
+        });
     }
     @Override
     public int getItemCount() {

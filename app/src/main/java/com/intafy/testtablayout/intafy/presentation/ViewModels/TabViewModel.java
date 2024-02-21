@@ -9,15 +9,16 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.intafy.testtablayout.intafy.domain.models.Workout;
+import com.intafy.testtablayout.intafy.domain.usecases.DeleteWorkoutByIdUseCase;
 import com.intafy.testtablayout.intafy.domain.usecases.GetWorkoutListUseCase;
 import com.intafy.testtablayout.intafy.domain.usecases.SaveWorkoutUseCase;
 import java.util.List;
 
 public class TabViewModel extends ViewModel {
     Workout newWorkout;
-
     SaveWorkoutUseCase saveWorkoutUseCase;
     GetWorkoutListUseCase getWorkoutListUseCase;
+    DeleteWorkoutByIdUseCase deleteWorkoutByIdUseCase;
 
     private final String DEFAULT_DATE ="Введите дату";
     private final String DEFAULT_TIME = "Введите время";
@@ -26,9 +27,10 @@ public class TabViewModel extends ViewModel {
     private final MutableLiveData<String> timeLiveData = new MutableLiveData<>(DEFAULT_TIME);
     private final MutableLiveData<String> distLiveData = new MutableLiveData<>();
 
-    public TabViewModel(SaveWorkoutUseCase saveWorkoutUseCase,GetWorkoutListUseCase getWorkoutListUseCase) {
+    public TabViewModel(SaveWorkoutUseCase saveWorkoutUseCase,GetWorkoutListUseCase getWorkoutListUseCase,DeleteWorkoutByIdUseCase deleteWorkoutByIdUseCase) {
         this.saveWorkoutUseCase = saveWorkoutUseCase;
         this.getWorkoutListUseCase=getWorkoutListUseCase;
+        this.deleteWorkoutByIdUseCase=deleteWorkoutByIdUseCase;
     }
 
     public void saveDate(String date){
@@ -55,6 +57,9 @@ public class TabViewModel extends ViewModel {
     }
     public List<Workout> getWorkoutList(){
         return new GetListTask().doInBackground();}
+    public void deleteWorkout(){
+        deleteWorkoutByIdUseCase.execute();
+    }
     public void clearAllValues(){
         dateLiveData.postValue(DEFAULT_DATE);
         timeLiveData.postValue(DEFAULT_TIME);
@@ -80,10 +85,6 @@ public class TabViewModel extends ViewModel {
                     saveWorkoutUseCase.execute(newWorkout);
             }
             return true;
-        }
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
         }
     }
 }

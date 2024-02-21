@@ -44,7 +44,6 @@ public class WorkoutFragment extends Fragment {
             tvDate = view.findViewById(R.id.tvDate);
             tvTime = view.findViewById(R.id.tvTime);
             edDist = view.findViewById(R.id.edDist);
-
             tabViewModel=new ViewModelProvider(requireActivity()).get(TabViewModel.class);
             tabViewModel.loadTime().observe(this,new Observer<String>(){
                 @Override
@@ -118,4 +117,4 @@ public class WorkoutFragment extends Fragment {
             tabViewModel.saveDate(dateOfDay);
         }
     };
-    }
+}

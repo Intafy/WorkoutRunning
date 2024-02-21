@@ -6,16 +6,10 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.intafy.testtablayout.intafy.domain.models.Workout;
-import com.intafy.testtablayout.intafy.presentation.TabLayoutActivity;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -47,10 +41,10 @@ public class SqliteStorage implements WorkoutStorageInterface {
             workoutDb.insert("WORKOUT", null, runValues);
             workoutDb.close();
             Log.d ("MyLog","All in Db");
-
+            Toast.makeText(context,"Workout has saved",Toast.LENGTH_SHORT).show();
         }
         catch (SQLException e) {
-//              Toast.makeText(context, "Database unavaible", Toast.LENGTH_SHORT).show();
+              Toast.makeText(context, "Database unavaible", Toast.LENGTH_SHORT).show();
         }
     }
     @Override
@@ -79,5 +73,11 @@ public class SqliteStorage implements WorkoutStorageInterface {
             Log.d("MyLog","dataBase unavailable");
         }
         return workouts;
+    }
+
+    @Override
+    public void deleteWorkout() {
+        //Пока это заглушка для отображения удаления из БД
+        Toast.makeText(context,"Workout has deleted",Toast.LENGTH_SHORT).show();
     }
 }
