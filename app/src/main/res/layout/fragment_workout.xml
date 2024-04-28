@@ -1,85 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".intafy.presentation.MainActivity"
+    android:id="@+id/linear_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/linear_date"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="100dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnDate"
-        app:layout_constraintHorizontal_bias="0.292"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:id="@+id/tvTime"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5sp"
+        android:layout_margin="10sp">
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:textSize="16dp" />
+        <Button
+            android:id="@+id/btnDate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="10sp"
+            android:text="@string/btnDate"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear_edit"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/btnTime"
-        app:layout_constraintEnd_toEndOf="@+id/tvDate"
-        app:layout_constraintStart_toStartOf="@+id/tvDate"
-        app:layout_constraintTop_toBottomOf="@+id/btnDate" />
-
-    <Button
-        android:id="@+id/btnDate"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5sp"
+        android:layout_margin="10sp">
+        <EditText
+            android:id="@+id/edDist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/enter_Dist"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:textAllCaps="false"
+            android:textColorHint="@color/cardview_dark_background"
+            android:textSize="14sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear_time"
         android:layout_height="wrap_content"
-        android:onClick="onClickDate"
-        android:text="@string/btnDate"
-        app:layout_constraintBottom_toBottomOf="@+id/tvDate"
-        app:layout_constraintEnd_toEndOf="@+id/btnTime"
-        app:layout_constraintStart_toStartOf="@+id/btnTime"
-        app:layout_constraintTop_toTopOf="@+id/tvDate" />
-
-    <Button
-        android:id="@+id/btnTime"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5sp"
+        android:layout_margin="10sp">
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:textSize="16dp"/>
+        <Button
+            android:id="@+id/btnTime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10sp"
+            android:layout_weight="1"
+            android:text="@string/btnTime" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear_buttons"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btnTime"
-        app:layout_constraintEnd_toEndOf="@+id/btnSave"
-        app:layout_constraintStart_toStartOf="@+id/btnSave"
-        app:layout_constraintTop_toBottomOf="@+id/btnDate" />
-
-    <EditText
-        android:id="@+id/edDist"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/enter_Dist"
-        android:inputType="number"
-        android:minHeight="48dp"
-        android:textAllCaps="false"
-        android:textColorHint="@color/cardview_dark_background"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/btnSave"
-        app:layout_constraintStart_toStartOf="@+id/tvTime"
-        app:layout_constraintTop_toBottomOf="@+id/btnTime" />
-
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="60dp"
-        android:text="@string/btnSave"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edDist" />
-
-    <Button
-        android:id="@+id/bntClear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
-        android:text="@string/btnClear"
-        app:layout_constraintBottom_toBottomOf="@+id/btnSave"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnSave" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:orientation="horizontal"
+        android:padding="5sp"
+        android:layout_margin="10sp">
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnSave"
+            android:layout_weight="1"
+            android:layout_margin="10sp"/>
+        <Button
+            android:id="@+id/bntClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnClear"
+            android:layout_weight="1"
+            android:layout_margin="10sp"/>
+    </LinearLayout>
+</LinearLayout>
