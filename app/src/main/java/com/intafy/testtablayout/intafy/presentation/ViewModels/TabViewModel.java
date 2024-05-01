@@ -3,7 +3,6 @@ package com.intafy.testtablayout.intafy.presentation.ViewModels;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -19,20 +18,18 @@ public class TabViewModel extends ViewModel {
     SaveWorkoutUseCase saveWorkoutUseCase;
     GetWorkoutListUseCase getWorkoutListUseCase;
     DeleteWorkoutByIdUseCase deleteWorkoutByIdUseCase;
-
     private final String DEFAULT_DATE ="Введите дату";
     private final String DEFAULT_TIME = "Введите время";
     private final String DEFAULT_DIST= "Введите расстояние";
+    String id;
     private final MutableLiveData<String>dateLiveData = new MutableLiveData<>(DEFAULT_DATE);
     private final MutableLiveData<String> timeLiveData = new MutableLiveData<>(DEFAULT_TIME);
     private final MutableLiveData<String> distLiveData = new MutableLiveData<>();
-
     public TabViewModel(SaveWorkoutUseCase saveWorkoutUseCase,GetWorkoutListUseCase getWorkoutListUseCase,DeleteWorkoutByIdUseCase deleteWorkoutByIdUseCase) {
         this.saveWorkoutUseCase = saveWorkoutUseCase;
         this.getWorkoutListUseCase=getWorkoutListUseCase;
         this.deleteWorkoutByIdUseCase=deleteWorkoutByIdUseCase;
     }
-
     public void saveDate(String date){
         dateLiveData.postValue(date);
     }
@@ -58,8 +55,9 @@ public class TabViewModel extends ViewModel {
     public List<Workout> getWorkoutList(){
         return new GetListTask().doInBackground();}
     public void deleteWorkout(){
-        deleteWorkoutByIdUseCase.execute();
+        new DeleteTask().doInBackground();
     }
+
     public void clearAllValues(){
         dateLiveData.postValue(DEFAULT_DATE);
         timeLiveData.postValue(DEFAULT_TIME);
@@ -84,6 +82,17 @@ public class TabViewModel extends ViewModel {
                             distLiveData.getValue());
                     saveWorkoutUseCase.execute(newWorkout);
             }
+            return true;
+        }
+    }
+    private class DeleteTask extends AsyncTask<Void,Void,Boolean>{
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            String date = dateLiveData.getValue();
+            String time = timeLiveData.getValue();
+            String dist = distLiveData.getValue();
+            Workout workout = new Workout(date,time,dist);
+            deleteWorkoutByIdUseCase.execute(workout);
             return true;
         }
     }

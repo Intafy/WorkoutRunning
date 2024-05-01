@@ -1,6 +1,7 @@
 package com.intafy.testtablayout.intafy.domain.usecases;
 
 import com.intafy.testtablayout.intafy.domain.WorkoutInterface;
+import com.intafy.testtablayout.intafy.domain.models.Workout;
 
 public class DeleteWorkoutByIdUseCase {
     WorkoutInterface workoutInterface;
@@ -8,7 +9,10 @@ public class DeleteWorkoutByIdUseCase {
     public DeleteWorkoutByIdUseCase(WorkoutInterface workoutInterface){
         this.workoutInterface=workoutInterface;
     }
-    public void execute(){
-        workoutInterface.deleteWorkout();
+    public void execute(Workout workout){
+        workoutInterface.deleteWorkout(workout);
     }
+//    public void execute(String date,String time,String dist){
+//        workoutInterface.deleteWorkout(date,time,dist);
+//    }
 }

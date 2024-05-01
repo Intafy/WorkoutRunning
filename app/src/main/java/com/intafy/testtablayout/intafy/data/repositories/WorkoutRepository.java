@@ -1,7 +1,5 @@
 package com.intafy.testtablayout.intafy.data.repositories;
 
-import android.util.Log;
-
 import com.intafy.testtablayout.intafy.data.storage.WorkoutStorageInterface;
 import com.intafy.testtablayout.intafy.domain.WorkoutInterface;
 import com.intafy.testtablayout.intafy.domain.models.Workout;
@@ -22,8 +20,12 @@ public class WorkoutRepository implements WorkoutInterface {
     public List<Workout> getWorkoutList() {
         return workoutStorageInterface.getWorkoutList();
     }
-    @Override
-    public  void deleteWorkout(){
-        workoutStorageInterface.deleteWorkout();
+    public  void deleteWorkout(Workout workout){
+        workoutStorageInterface.deleteWorkout(workout);
     }
+//    @Override
+//    public  void deleteWorkout(String date,String time, String dist){
+//        workoutStorageInterface.deleteWorkout(date,time,dist);
+//
+//    }
 }

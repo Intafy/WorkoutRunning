@@ -14,10 +14,12 @@ import java.util.List;
 
 
 public class SqliteStorage implements WorkoutStorageInterface {
+    List<Workout> workouts;
     Context context;
     private WorkoutSqliteHelper workoutSqliteHelper;
 
     private Cursor cursor;
+    private String id;
 
     public SqliteStorage(Context context) {
         this.context = context;
@@ -26,11 +28,10 @@ public class SqliteStorage implements WorkoutStorageInterface {
     //Здесь пишем код сохранения в БД
     @Override
     public void saveWorkout(Workout workout) {
-
-    workoutSqliteHelper = new WorkoutSqliteHelper(context);
-    String date = workout.date;
-    String time = workout.time;
-    String dist = workout.dist;
+        workoutSqliteHelper = new WorkoutSqliteHelper(context);
+        String date = workout.date;
+        String time = workout.time;
+        String dist = workout.dist;
         Log.d("MyLog","All in storage");
         try {
             ContentValues runValues = new ContentValues();
@@ -39,45 +40,57 @@ public class SqliteStorage implements WorkoutStorageInterface {
             SQLiteDatabase workoutDb = workoutSqliteHelper.getWritableDatabase();
             Log.d("MyLog","Db has created");
             workoutDb.insert("WORKOUT", null, runValues);
-            workoutDb.close();
+            //            workoutDb.close();
             Log.d ("MyLog","All in Db");
             Toast.makeText(context,"Workout has saved",Toast.LENGTH_SHORT).show();
         }
         catch (SQLException e) {
-              Toast.makeText(context, "Database unavaible", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Database unavaible", Toast.LENGTH_SHORT).show();
         }
     }
     @Override
     public List<Workout> getWorkoutList() {
 
         //Добавление в лист записей из БД с помощью cursor
-        List<Workout>workouts = new ArrayList<>();
+        workouts = new ArrayList<>();
         workoutSqliteHelper = new WorkoutSqliteHelper(context);
         try{
             SQLiteDatabase workoutDb = workoutSqliteHelper.getReadableDatabase();
             cursor = workoutDb.query("WORKOUT",
                     new String [] {"DATE","DESCRIPTION"},
                     null,null,null,null,null);
-            if(cursor.moveToFirst()){
-                while(cursor.moveToNext()){
-                String date = cursor.getString(0);
-                String description = cursor.getString(1);
-                String dist = cursor.getString(1);
-                Workout workout = new Workout(date,description,dist);
-                workouts.add(workout);
-                cursor.moveToNext();
-                }
-            }else cursor.close();
-            workoutDb.close();
+
+            cursor.moveToFirst();
+                while(!cursor.isAfterLast()){
+
+                    String date = cursor.getString(0);
+                    String description = cursor.getString(1);
+                    String dist = cursor.getString(1);
+                    Workout workout = new Workout(date,description,dist);
+                    workouts.add(workout);
+                    cursor.moveToNext();
+            }
+            cursor.close();
+//            workoutDb.close();
         } catch (SQLException e){
             Log.d("MyLog","dataBase unavailable");
         }
         return workouts;
     }
-
     @Override
-    public void deleteWorkout() {
+    public void deleteWorkout(Workout workout) {
+        String date = workout.date;
+        String descr = "Вы пробежали "  + workout.dist + " метров за " + workout.time;
         //Пока это заглушка для отображения удаления из БД
         Toast.makeText(context,"Workout has deleted",Toast.LENGTH_SHORT).show();
+        workoutSqliteHelper = new WorkoutSqliteHelper(context);
+        try {
+           SQLiteDatabase workoutDb = workoutSqliteHelper.getWritableDatabase();
+//         workoutDb.delete("WORKOUT","_id=?" ,new String[]{id});
+           workoutDb.execSQL("DELETE FROM workout WHERE date=date AND description=descr");
+        }
+        catch (SQLException e){
+            Log.d("MyLog","dataBase unavailable");
+        }
     }
 }
