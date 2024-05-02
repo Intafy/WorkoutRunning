@@ -23,9 +23,4 @@ public class WorkoutRepository implements WorkoutInterface {
     public  void deleteWorkout(Workout workout){
         workoutStorageInterface.deleteWorkout(workout);
     }
-//    @Override
-//    public  void deleteWorkout(String date,String time, String dist){
-//        workoutStorageInterface.deleteWorkout(date,time,dist);
-//
-//    }
 }

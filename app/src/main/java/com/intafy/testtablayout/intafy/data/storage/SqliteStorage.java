@@ -19,7 +19,6 @@ public class SqliteStorage implements WorkoutStorageInterface {
     private WorkoutSqliteHelper workoutSqliteHelper;
 
     private Cursor cursor;
-    private String id;
 
     public SqliteStorage(Context context) {
         this.context = context;
@@ -81,13 +80,13 @@ public class SqliteStorage implements WorkoutStorageInterface {
     public void deleteWorkout(Workout workout) {
         String date = workout.date;
         String descr = "Вы пробежали "  + workout.dist + " метров за " + workout.time;
-        //Пока это заглушка для отображения удаления из БД
-        Toast.makeText(context,"Workout has deleted",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"Запись удалена",Toast.LENGTH_SHORT).show();
         workoutSqliteHelper = new WorkoutSqliteHelper(context);
         try {
            SQLiteDatabase workoutDb = workoutSqliteHelper.getWritableDatabase();
-//         workoutDb.delete("WORKOUT","_id=?" ,new String[]{id});
-           workoutDb.execSQL("DELETE FROM workout WHERE date=date AND description=descr");
+           workoutDb.delete("WORKOUT","DATE=?",new String[]{date});
+
+
         }
         catch (SQLException e){
             Log.d("MyLog","dataBase unavailable");

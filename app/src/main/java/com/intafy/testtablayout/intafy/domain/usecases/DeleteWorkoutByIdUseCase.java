@@ -12,7 +12,4 @@ public class DeleteWorkoutByIdUseCase {
     public void execute(Workout workout){
         workoutInterface.deleteWorkout(workout);
     }
-//    public void execute(String date,String time,String dist){
-//        workoutInterface.deleteWorkout(date,time,dist);
-//    }
 }

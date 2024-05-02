@@ -54,8 +54,8 @@ public class TabViewModel extends ViewModel {
     }
     public List<Workout> getWorkoutList(){
         return new GetListTask().doInBackground();}
-    public void deleteWorkout(){
-        new DeleteTask().doInBackground();
+    public void deleteWorkout(Workout workout){
+        new DeleteTask().doInBackground(workout);
     }
 
     public void clearAllValues(){
@@ -85,12 +85,15 @@ public class TabViewModel extends ViewModel {
             return true;
         }
     }
-    private class DeleteTask extends AsyncTask<Void,Void,Boolean>{
+    //Переписать метод, сюда мы должны передать workout из метода deleteWorkout(Workout workout) выше
+    //и его пробросить дальше для удаления из базы данных
+    private class DeleteTask extends AsyncTask<Workout,Void,Boolean>{
         @Override
-        protected Boolean doInBackground(Void... voids) {
-            String date = dateLiveData.getValue();
-            String time = timeLiveData.getValue();
-            String dist = distLiveData.getValue();
+        protected Boolean doInBackground(Workout... workouts) {
+
+            String date = workouts[0].date;
+            String time = workouts[0].time;
+            String dist = workouts[0].dist;
             Workout workout = new Workout(date,time,dist);
             deleteWorkoutByIdUseCase.execute(workout);
             return true;
