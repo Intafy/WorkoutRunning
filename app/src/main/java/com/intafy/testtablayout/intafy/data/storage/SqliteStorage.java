@@ -18,6 +18,7 @@ public class SqliteStorage implements WorkoutStorageInterface {
     Context context;
     private WorkoutSqliteHelper workoutSqliteHelper;
 
+
     private Cursor cursor;
 
     public SqliteStorage(Context context) {
@@ -78,13 +79,21 @@ public class SqliteStorage implements WorkoutStorageInterface {
     }
     @Override
     public void deleteWorkout(Workout workout) {
+        //Переделать передачу description в методе getWorkoutList(), так как
+        //в поле workout.time там сохраняется вся информация из description
+        //и, соответственно, в методе deleteWorkout() неоходимо ее "вытаскивать"
+        // из поля workout.time, приравнивая переменной descr, которую мы передаем
+        //в workoutDb.delete(descr,date)
         String date = workout.date;
-        String descr = "Вы пробежали "  + workout.dist + " метров за " + workout.time;
+        String descr = workout.time;
+//        String sqliteDeleteRequest = "DELETE FROM WORKOUT WHERE DATE="+date+" AND DESCRIPTION="+descr;
         Toast.makeText(context,"Запись удалена",Toast.LENGTH_SHORT).show();
         workoutSqliteHelper = new WorkoutSqliteHelper(context);
         try {
            SQLiteDatabase workoutDb = workoutSqliteHelper.getWritableDatabase();
-           workoutDb.delete("WORKOUT","DATE=?",new String[]{date});
+//           workoutDb.delete("WORKOUT","DATE=?",new String[]{date});
+//           workoutDb.execSQL("DELETE FROM WORKOUT WHERE DESCRIPTION = descr");
+           workoutDb.delete("WORKOUT","DESCRIPTION=? AND DATE=?",new String[]{descr,date});
 
 
         }

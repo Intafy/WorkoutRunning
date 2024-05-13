@@ -21,10 +21,9 @@ public class TabViewModel extends ViewModel {
     private final String DEFAULT_DATE ="Введите дату";
     private final String DEFAULT_TIME = "Введите время";
     private final String DEFAULT_DIST= "Введите расстояние";
-    String id;
+    private String dist;
     private final MutableLiveData<String>dateLiveData = new MutableLiveData<>(DEFAULT_DATE);
     private final MutableLiveData<String> timeLiveData = new MutableLiveData<>(DEFAULT_TIME);
-    private final MutableLiveData<String> distLiveData = new MutableLiveData<>();
     public TabViewModel(SaveWorkoutUseCase saveWorkoutUseCase,GetWorkoutListUseCase getWorkoutListUseCase,DeleteWorkoutByIdUseCase deleteWorkoutByIdUseCase) {
         this.saveWorkoutUseCase = saveWorkoutUseCase;
         this.getWorkoutListUseCase=getWorkoutListUseCase;
@@ -42,8 +41,9 @@ public class TabViewModel extends ViewModel {
     public LiveData<String> loadTime(){
         return timeLiveData;
     }
-    public void saveDist(String dist){distLiveData.postValue(dist);}
-    public LiveData<String>loadDist(){return distLiveData;}
+    public void saveDist(String dist){
+        this.dist=dist;
+    }
     @Override
     protected void onCleared() {
         super.onCleared();
@@ -74,19 +74,17 @@ public class TabViewModel extends ViewModel {
         protected Boolean doInBackground(Void... voids) {
             if(dateLiveData.getValue()!= DEFAULT_DATE
                && timeLiveData.getValue()!= DEFAULT_TIME
-               && distLiveData.getValue()!=DEFAULT_DIST
-               && distLiveData.getValue()!=null) {
+               && dist!=DEFAULT_DIST
+               && dist!=null) {
                     newWorkout = new Workout(
                             dateLiveData.getValue(),
                             timeLiveData.getValue(),
-                            distLiveData.getValue());
+                            dist);
                     saveWorkoutUseCase.execute(newWorkout);
             }
             return true;
         }
     }
-    //Переписать метод, сюда мы должны передать workout из метода deleteWorkout(Workout workout) выше
-    //и его пробросить дальше для удаления из базы данных
     private class DeleteTask extends AsyncTask<Workout,Void,Boolean>{
         @Override
         protected Boolean doInBackground(Workout... workouts) {

@@ -57,12 +57,6 @@ public class WorkoutFragment extends Fragment {
                     tvDate.setText(s);
                 }
             });
-            tabViewModel.loadDist().observe(this, new Observer<String>() {
-                @Override
-                public void onChanged(String s) {
-                    edDist.setText(s);
-                }
-            });
         }
     btnTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +85,8 @@ public class WorkoutFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if(edDist.getText()!=null) {
-                        tabViewModel.saveDist(edDist.getText().toString());
+                        String dist = edDist.getText().toString();
+                        tabViewModel.saveDist(dist);
                         tabViewModel.setWorkout();
                     }
                 }
